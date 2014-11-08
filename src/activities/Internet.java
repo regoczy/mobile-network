@@ -11,6 +11,8 @@ public class Internet extends OneSidedActivity {
 		super(initiator);
 
 		this.datatraffic = datatraffic;
+
+		System.out.println(initiator + " használta az internetet");
 	}
 
 	public int getDataTraffic() {

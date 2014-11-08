@@ -10,8 +10,8 @@ public class Call extends TwoSidedActivity {
 		super(initiator, receiver);
 		this.length = length;
 		System.out.println(
-			"Telefonálás történt " + initiator.getNumber()
-			+ " és " + receiver.getNumber() + " között(" + length + " s)"
+			"Telefonálás törtönt " + initiator.getNumber()
+			+ " és " + receiver.getNumber() + " között(" + length + "s)"
 		);
 	}
 

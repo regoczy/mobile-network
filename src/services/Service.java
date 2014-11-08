@@ -15,9 +15,23 @@ public class Service {
 
 	private List<Subscription> subscriptions = new ArrayList<Subscription>();
 
+	private int prePaidCallfee;
+
+	private int prePaidTextfee;
+
+	private int prePaidInternetfee;
+
+	private int paidCallfee;
+
+	private int paidTextfee;
+
+	private int paidInternetfee;
+
 	public Service(String name, String prefix) {
 		this.name = name;
 		this.prefix = prefix;
+
+		System.out.println("Szolgáltató létrehozva: " + this.name + " " + this.prefix);
 	}
 
 	public String getPrefix() {
@@ -57,17 +71,40 @@ public class Service {
 	}
 
 	public void createAPrePaidSubscription(Subscriber subscriber) {
-		PrePaidSubscription tmp = new PrePaidSubscription(generatePhoneNumber(), 20, 12, 5);
+		PrePaidSubscription tmp = new PrePaidSubscription(
+				generatePhoneNumber(), prePaidCallfee, prePaidTextfee, prePaidInternetfee);
+
+		tmp.loadBalance(3500);
 
 		subscriber.addSubscription(tmp);
 		this.subscriptions.add(tmp);
+		System.out.println(this.name + " szolgáltatónál létrejött egy feltöltőkártyás előfizetes "
+				+ subscriber.getName() + " számára (" + tmp.getNumber() + ")");
 	}
 
 	public void createAPaidSubscription(Subscriber subscriber) {
-		Subscription tmp = new PaidSubscription(generatePhoneNumber(), 15, 10, 10);
+		Subscription tmp = new PaidSubscription(generatePhoneNumber(), paidCallfee, paidTextfee, paidInternetfee);
 
 		subscriber.addSubscription(tmp);
 		this.subscriptions.add(tmp);
+		System.out.println(this.name + " szolgáltatónál létrejött egy számlás előfizetes "
+				+ subscriber.getName() + " számára (" + tmp.getNumber() + ")");
+	}
+
+	public void setPrePaidFees(int callfee, int textfee, int internetfee) {
+		this.prePaidCallfee = callfee;
+		this.prePaidTextfee = textfee;
+		this.prePaidInternetfee = internetfee;
+		System.out.println("Feltöltőkártyás:"
+				+ "\nHívás díj " + callfee + "\t SMS díj: " + textfee + "\tInternet díj: " + internetfee);
+	}
+
+	public void setPaidFees(int callfee, int textfee, int internetfee) {
+		this.paidCallfee = callfee;
+		this.paidTextfee = textfee;
+		this.paidInternetfee = internetfee;
+		System.out.println("Előfizetéses:"
+				+ "\nHívás díj: " + callfee + "\t SMS díj: " + textfee + "\tInternet díj: " + internetfee);
 	}
 
 	public Subscription getSubscriptionByNumber(String phoneNumber) {
@@ -84,6 +121,10 @@ public class Service {
 
 	public String getName() {
 		return this.name;
+	}
+
+	public List<Subscription> getSubscriptions() {
+		return subscriptions;
 	}
 
 }

@@ -1,6 +1,9 @@
 package services;
 
-import activities.Activity;
+import activities.Call;
+import activities.Internet;
+import activities.Text;
+
 
 
 public class PrePaidSubscription extends Subscription {
@@ -9,27 +12,38 @@ public class PrePaidSubscription extends Subscription {
 		super(number, callfee, textfee, internetfee);
 	}
 
-	public void addToBalance() {
-	}
-
-	public void removeFromBalance() {
-	}
-
 	@Override
-	public int getAllBillPrice() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int getAllActivityPrice() {
-		int priceOfActivities = 0;
-
-		for (Activity activity : activities) {
-			priceOfActivities += this.getPriceOfActivity(activity);
+	public Call call(String number, int length) {
+		if (0 < this.getBalance()) {
+			return super.call(number, length);
 		}
 
-		return -1 * priceOfActivities;
+		System.out.println("Hívás megtagadva!");
+		// TODO exception
+
+		return null;
 	}
 
+	@Override
+	public Text text(String number, int characters) {
+		if (0 < this.getBalance()) {
+			return super.text(number, characters);
+		}
+
+		System.out.println("SMS megtagadva!");
+		// TODO exception
+
+		return null;
+	}
+
+	@Override
+	public Internet internet(int datatraffic) {
+		if (0 < this.getBalance()) {
+			return super.internet(datatraffic);
+		}
+		System.out.println("Internet megtagadva!");
+		// TODO exception
+
+		return null;
+	}
 }

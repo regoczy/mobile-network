@@ -29,6 +29,9 @@ public class Country {
 	public Country(String name, String code) {
 		this.name = name;
 		this.code = code;
+
+		System.out.println("Ország létrehozva: " + name + ";" + code);
+
 		countries.add(this);
 	}
 
@@ -39,7 +42,9 @@ public class Country {
 	public void addService(Service service)
 	{
 		services.add(service);
+		System.out.println(this.name + " országhoz hozzárendelve a " + service.getName() + " szolgáltató.");
 	}
+
 
 	public Service getServiceByCode(String serviceCode) {
 		for (Service service : services) {
@@ -52,6 +57,10 @@ public class Country {
 		// TODO: exception
 		return null;
 
+	}
+
+	public List<Service> getServices() {
+		return services;
 	}
 
 }

@@ -9,11 +9,14 @@ public class Text extends TwoSidedActivity {
 	public Text(Subscription initiator, Subscription receiver, int characters) {
 		super(initiator, receiver);
 		this.characters = characters;
+		System.out.println(
+				"SMS küldés " + initiator.getNumber()
+				+ " és " + receiver.getNumber() + " között(" + characters + " karakter)"
+			);
 	}
 
-public int getCharacters() {
-	// TODO Auto-generated method stub
-	return 0;
-}
+	public int getCharacters() {
+		return characters;
+	}
 
 }

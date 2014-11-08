@@ -11,28 +11,11 @@ public class Subscriber {
 
 	public Subscriber(String name) {
 		this.name = name;
-	}
-
-	public int getCash() {
-	return 0;
-	}
-
-	public void removeCash() {
-	}
-
-	public void text(String receiver, int characters) {
-	}
-
-	public void useInternet(int datatraffic) {
-	}
-
-	public void addCash() {
+		System.out.println("Új előfizető: " + name);
 	}
 
 	public void addSubscription(Subscription subscription) {
 		this.subscriptions.add(subscription);
-
-
 	}
 
 	public List<Subscription> getSubscriptions() {
@@ -40,8 +23,22 @@ public class Subscriber {
 	}
 
 	public void call(int indexOfSubscription, String phoneNumber, int length) {
-		System.out.println(this.name + " hívás kezdeményezett(" + phoneNumber + ")");
+		System.out.println(this.name + " hívást kezdmenyézett(" + phoneNumber + ")");
 		this.getSubscriptions().get(indexOfSubscription).call(phoneNumber, length);
+	}
+
+	public void text(int indexOfSubscription, String phoneNumber, int characters) {
+		System.out.println(this.name + " SMS-t küldött(" + phoneNumber + ")");
+		this.getSubscriptions().get(indexOfSubscription).text(phoneNumber, characters);
+	}
+
+	public void useInternet(int indexOfSubscription, int datatraffic) {
+		System.out.println(this.name + " használta a mobil internetet");
+		this.getSubscriptions().get(indexOfSubscription).internet(datatraffic);
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }

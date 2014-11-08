@@ -15,11 +15,13 @@ public abstract class Subscription {
 
 	protected int textfee;
 
-	protected String number;
-
 	protected int internetfee;
 
+	protected String number;
+
 	protected List<Activity> activities = new ArrayList<Activity>();
+
+	protected List<Integer> bills = new ArrayList<Integer>();
 
 	public Subscription(String number, int callfee, int textfee, int internetfee) {
 		this.number = number;
@@ -44,15 +46,43 @@ public abstract class Subscription {
 		Call call = new Call(this, subscription, length);
 		this.activities.add(call);
 
-		System.out.println("Hívás megtörtént. Ára:" + length * callfee + " Ft");
-		System.out.println("Aktuális egyenleg:" + this.getBalance() + " Ft");
+		System.out.println("Hívás megtörtént. ára :" + ( length / 60 + 1 ) * callfee + " Ft");
+		System.out.println("Aktuális egyenleg :" + this.getBalance() + " Ft");
 
 		return call;
 	}
 
+	public Text text(String number, int characters) {
+		String countryCode = number.substring(0, 2);
+		String serviceCode = number.substring(2, 4);
+		String phoneNumber = number.substring(4);
+
+		Subscription subscription = Country.getCountryByCode(countryCode)
+				.getServiceByCode(serviceCode)
+				.getSubscriptionByNumber(phoneNumber);
+
+		Text text = new Text(this, subscription, characters);
+		this.activities.add(text);
+
+		System.out.println("SMS elküldve. ára :" + ( characters / 160 + 1 ) * textfee + " Ft");
+		System.out.println("Aktuális egyenleg :" + this.getBalance() + " Ft");
+
+		return text;
+	}
+
+	public Internet internet(int datatraffic) {
+		Internet internet = new Internet(this, datatraffic);
+		this.activities.add(internet);
+
+		System.out.println("Aktuális böngészés ára:" + datatraffic * internetfee + " Ft");
+		System.out.println("Aktuális egyenleg :" + this.getBalance() + " Ft");
+
+		return internet;
+	}
+
 	public int getPriceOfActivity(Activity activity) {
 		if (activity instanceof Call) {
-			return ((Call)activity).getLength() * callfee;
+			return (((Call)activity).getLength() / 60 +1 ) * callfee;
 		}
 
 		if (activity instanceof Text) {
@@ -69,10 +99,38 @@ public abstract class Subscription {
 
 	public int getBalance()
 	{
-		return this.getAllActivityPrice() + this.getAllBillPrice();
+		return this.getAllBillPrice() - this.getAllActivityPrice();
 	}
 
-	public abstract int getAllBillPrice() ;
+	public int getAllBillPrice() {
+		int amountOfBills = 0;
 
-	public abstract int getAllActivityPrice();
+		for (int bill : bills ) {
+			amountOfBills += bill;
+		}
+
+		return amountOfBills;
+	}
+
+	public int getAllActivityPrice()
+	{
+		int amountOfActivities = 0;
+
+		for (Activity activity : activities) {
+			amountOfActivities += this.getPriceOfActivity(activity);
+		}
+
+		return amountOfActivities;
+	}
+
+	public void loadBalance(int amountOfBill)
+	{
+		this.bills.add(amountOfBill);
+	}
+
+	@Override
+	public String toString() {
+		return this.number;
+	}
+
 }

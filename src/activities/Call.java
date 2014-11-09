@@ -9,10 +9,11 @@ public class Call extends TwoSidedActivity {
 	public Call(Subscription initiator, Subscription receiver, int length) {
 		super(initiator, receiver);
 		this.length = length;
-		System.out.println(
-			"Telefonálás törtönt " + initiator.getNumber()
-			+ " és " + receiver.getNumber() + " között(" + length + "s)"
-		);
+		
+		/*System.out.println(
+			"Call from " + initiator.getNumber()
+			+ " to " + receiver.getNumber() + " (" + length + "s)"
+		);*/
 	}
 
 	public int getLength()

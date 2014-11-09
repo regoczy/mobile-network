@@ -30,7 +30,7 @@ public class Country {
 		this.name = name;
 		this.code = code;
 
-		System.out.println("Ország létrehozva: " + name + ";" + code);
+		System.out.println("Country created: " + name + ";" + code);
 
 		countries.add(this);
 	}
@@ -42,7 +42,7 @@ public class Country {
 	public void addService(Service service)
 	{
 		services.add(service);
-		System.out.println(this.name + " országhoz hozzárendelve a " + service.getName() + " szolgáltató.");
+		System.out.println(service.getName() + " binded to " + this.name);
 	}
 
 

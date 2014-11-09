@@ -18,7 +18,7 @@ public class PrePaidSubscription extends Subscription {
 			return super.call(number, length);
 		}
 
-		System.out.println("Hívás megtagadva!");
+		System.out.println("Call denied!");
 		// TODO exception
 
 		return null;
@@ -30,7 +30,7 @@ public class PrePaidSubscription extends Subscription {
 			return super.text(number, characters);
 		}
 
-		System.out.println("SMS megtagadva!");
+		System.out.println("SMS denied!");
 		// TODO exception
 
 		return null;
@@ -41,7 +41,7 @@ public class PrePaidSubscription extends Subscription {
 		if (0 < this.getBalance()) {
 			return super.internet(datatraffic);
 		}
-		System.out.println("Internet megtagadva!");
+		System.out.println("Internet denied!");
 		// TODO exception
 
 		return null;

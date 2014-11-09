@@ -15,59 +15,15 @@ public class Main
 
 	public static void main(String[] args)
 	{
-		/*Country hungary = new Country("Hungary", "06");
-
-		Service telenor = new Service("Telenor", "20");
-		hungary.addService(telenor);
-
-		Subscriber pitt = new Subscriber("Brad Pitt");
-		Subscriber ricsi = new Subscriber("Reg�czy Rich�rd");
-
-		telenor.createAPrePaidSubscription(pitt);
-		telenor.createAPaidSubscription(ricsi);
-
-		pitt.call(
-			0,
-			hungary.getCode() +
-			telenor.getPrefix() +
-			ricsi.getSubscriptions().get(0).getNumber(),
-			126);
-
-		pitt.text(
-			0,
-			hungary.getCode() +
-			telenor.getPrefix() +
-			ricsi.getSubscriptions().get(0).getNumber(),
-			61);
- /*
-		ricsi.call(
-			0,
-			hungary.getCode() +
-			telenor.getPrefix() +
-			pitt.getSubscriptions().get(0).getNumber(),
-			23
-			);
-
-		ricsi.text(
-			0,
-			hungary.getCode() +
-			telenor.getPrefix() +
-			pitt.getSubscriptions().get(0).getNumber(),
-			50
-			);
-
-		ricsi.useInternet(0, 64);
-
-		System.out.println(telenor.getName() + " fel� tartoz�sok:" + telenor.getDebits());*/
 
 		countries = generateCountries();
 		services = generateServices();
-		subscribers = generateSubscribers();
 		bindServicesToCountries();
+		subscribers = generateSubscribers();
 		generateSubscriptions();
 		generateActivities();
 		for (Service service : services) {
-			System.out.println(service.getName() + "bevétele: " + service.getDebits());
+			System.out.println("Income of " + service.getName() + ": " + service.getDebits() + "Ft");
 		}
 
 	}
@@ -80,7 +36,7 @@ public class Main
 		int numberOfCountries = r.nextInt(2) + 1;
 
 		for (int i = 0; i < numberOfCountries; i++) {
-			countries.add(new Country("ország" + i, "" + (r.nextInt(89) + 10)));
+			countries.add(new Country("TestCountry" + i, "" + (r.nextInt(89) + 10)));
 		}
 
 		return countries;
@@ -94,7 +50,7 @@ public class Main
 		int	numberOfServices = r.nextInt(3) + 1;
 
 		for (int i = 0; i < numberOfServices; i++) {
-			Service tmp = new Service("szolgáltató" + i, "" + (r.nextInt(89) + 10));
+			Service tmp = new Service("TestService" + i, "" + (r.nextInt(89) + 10));
 			tmp.setPrePaidFees(r.nextInt(20) + 1, r.nextInt(20) + 1, r.nextInt(20) + 1);
 			tmp.setPaidFees(r.nextInt(20) + 1, r.nextInt(20) + 1, r.nextInt(20) + 1);
 			services.add(tmp);
@@ -121,7 +77,7 @@ public class Main
 		int numberOfSubscribers = r.nextInt(9) + 1;
 
 		for (int i = 0; i < numberOfSubscribers; i++) {
-			subscribers.add(new Subscriber("előfizető" + i));
+			subscribers.add(new Subscriber("TestSubscriber" + i));
 		}
 
 		return subscribers;

@@ -11,7 +11,7 @@ public class Subscriber {
 
 	public Subscriber(String name) {
 		this.name = name;
-		System.out.println("Új előfizető: " + name);
+		System.out.println("New subscriber: " + name);
 	}
 
 	public void addSubscription(Subscription subscription) {
@@ -23,17 +23,17 @@ public class Subscriber {
 	}
 
 	public void call(int indexOfSubscription, String phoneNumber, int length) {
-		System.out.println(this.name + " hívást kezdmenyézett(" + phoneNumber + ")");
+		System.out.println(this.name + " initiated a call... (" + phoneNumber + ")");
 		this.getSubscriptions().get(indexOfSubscription).call(phoneNumber, length);
 	}
 
 	public void text(int indexOfSubscription, String phoneNumber, int characters) {
-		System.out.println(this.name + " SMS-t küldött(" + phoneNumber + ")");
+		System.out.println(this.name + " initiated a text message... (" + phoneNumber + ")");
 		this.getSubscriptions().get(indexOfSubscription).text(phoneNumber, characters);
 	}
 
 	public void useInternet(int indexOfSubscription, int datatraffic) {
-		System.out.println(this.name + " használta a mobil internetet");
+		System.out.println(this.name + " started using mobile internet...");
 		this.getSubscriptions().get(indexOfSubscription).internet(datatraffic);
 	}
 

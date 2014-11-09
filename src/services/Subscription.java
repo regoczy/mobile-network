@@ -46,8 +46,8 @@ public abstract class Subscription {
 		Call call = new Call(this, subscription, length);
 		this.activities.add(call);
 
-		System.out.println("Hívás megtörtént. ára :" + ( length / 60 + 1 ) * callfee + " Ft");
-		System.out.println("Aktuális egyenleg :" + this.getBalance() + " Ft");
+		System.out.println("Call from " + this.getNumber() + " to " + number + ". Price:" + ( length / 60 + 1 ) * callfee + " Ft");
+		System.out.println("Current balance :" + this.getBalance() + " Ft");
 
 		return call;
 	}
@@ -64,8 +64,8 @@ public abstract class Subscription {
 		Text text = new Text(this, subscription, characters);
 		this.activities.add(text);
 
-		System.out.println("SMS elküldve. ára :" + ( characters / 160 + 1 ) * textfee + " Ft");
-		System.out.println("Aktuális egyenleg :" + this.getBalance() + " Ft");
+		System.out.println("SMS from " + this.getNumber() + " to " + number + ". Price:" + ( characters / 160 + 1 ) * textfee + " Ft");
+		System.out.println("Current balance :" + this.getBalance() + " Ft");
 
 		return text;
 	}
@@ -74,8 +74,8 @@ public abstract class Subscription {
 		Internet internet = new Internet(this, datatraffic);
 		this.activities.add(internet);
 
-		System.out.println("Aktuális böngészés ára:" + datatraffic * internetfee + " Ft");
-		System.out.println("Aktuális egyenleg :" + this.getBalance() + " Ft");
+		System.out.println("Mobile internet used from " + this.getNumber() + ". Price:" + datatraffic * internetfee + " Ft");
+		System.out.println("Current balance :" + this.getBalance() + " Ft");
 
 		return internet;
 	}

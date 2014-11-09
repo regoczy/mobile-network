@@ -12,7 +12,7 @@ public class Internet extends OneSidedActivity {
 
 		this.datatraffic = datatraffic;
 
-		System.out.println(initiator + " használta az internetet");
+		//System.out.println(initiator + " used mobile internet. ");
 	}
 
 	public int getDataTraffic() {

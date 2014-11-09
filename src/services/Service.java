@@ -11,8 +11,6 @@ public class Service {
 
 	private String prefix;
 
-	private int income;
-
 	private List<Subscription> subscriptions = new ArrayList<Subscription>();
 
 	private int prePaidCallfee;
@@ -31,7 +29,7 @@ public class Service {
 		this.name = name;
 		this.prefix = prefix;
 
-		System.out.println("Szolgáltató létrehozva: " + this.name + " " + this.prefix);
+		System.out.println("Service created: " + this.name + " (" + this.prefix + ")");
 	}
 
 	public String getPrefix() {
@@ -58,9 +56,6 @@ public class Service {
 		return income;
 	}
 
-	public void addToIncome() {
-	}
-
 	protected String generatePhoneNumber() {
 		Random numberGenerator = new Random();
 		String number = "";
@@ -78,8 +73,8 @@ public class Service {
 
 		subscriber.addSubscription(tmp);
 		this.subscriptions.add(tmp);
-		System.out.println(this.name + " szolgáltatónál létrejött egy feltöltőkártyás előfizetes "
-				+ subscriber.getName() + " számára (" + tmp.getNumber() + ")");
+		System.out.println("Pre-Paid type subscription is created in " + this.name + " for "
+				+ subscriber.getName() + " (" + tmp.getNumber() + ")");
 	}
 
 	public void createAPaidSubscription(Subscriber subscriber) {
@@ -87,24 +82,24 @@ public class Service {
 
 		subscriber.addSubscription(tmp);
 		this.subscriptions.add(tmp);
-		System.out.println(this.name + " szolgáltatónál létrejött egy számlás előfizetes "
-				+ subscriber.getName() + " számára (" + tmp.getNumber() + ")");
+		System.out.println("Paid type subscription is created in " + this.name + " for "
+				+ subscriber.getName() + " (" + tmp.getNumber() + ")");
 	}
 
 	public void setPrePaidFees(int callfee, int textfee, int internetfee) {
 		this.prePaidCallfee = callfee;
 		this.prePaidTextfee = textfee;
 		this.prePaidInternetfee = internetfee;
-		System.out.println("Feltöltőkártyás:"
-				+ "\nHívás díj " + callfee + "\t SMS díj: " + textfee + "\tInternet díj: " + internetfee);
+		System.out.println(this.getName() + "'s Pre-Paid type fees:"
+				+ "\nCall: " + callfee + "\t SMS: " + textfee + "\tInternet: " + internetfee);
 	}
 
 	public void setPaidFees(int callfee, int textfee, int internetfee) {
 		this.paidCallfee = callfee;
 		this.paidTextfee = textfee;
 		this.paidInternetfee = internetfee;
-		System.out.println("Előfizetéses:"
-				+ "\nHívás díj: " + callfee + "\t SMS díj: " + textfee + "\tInternet díj: " + internetfee);
+		System.out.println(this.getName() + "'s Paid type fees:"
+				+ "\nCall: " + callfee + "\t SMS: " + textfee + "\tInternet: " + internetfee);
 	}
 
 	public Subscription getSubscriptionByNumber(String phoneNumber) {
